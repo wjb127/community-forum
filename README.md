@@ -2,6 +2,15 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+로컬 -> github 업로드 루틴
+
+1. GitHub에서 리포지토리 생성(README 생성X)
+2. 로컬에서 Git 초기화(git init)
+3. 프로젝트 파일을 추가(git add .)하고 커밋(git commit -m "Initial commit").
+4. GitHub 리모트 저장소와 연결(git remote add origin ~).
+5. 푸시(git push -u origin main).
+
+
 First, run the development server:
 
 ```bash
