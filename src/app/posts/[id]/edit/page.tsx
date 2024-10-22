@@ -43,24 +43,44 @@ export default function EditPost({ params }: { params: { id: string } }) {
     }
   };
 
+  const cancelEdit = () => {
+    router.push(`/posts/${params.id}`);
+  };
+
   return (
-    <div>
-      <h1>게시글 수정</h1>
-      <form onSubmit={updatePost}>
+    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+      <h1 className="text-3xl font-bold mb-6 text-center">게시글 수정</h1>
+      <form onSubmit={updatePost} className="space-y-4">
         <input
           type="text"
           placeholder="제목"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <textarea
           placeholder="내용"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           required
+          className="w-full h-40 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button type="submit">수정하기</button>
+        <div className="flex space-x-4">
+          <button
+            type="submit"
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+          >
+            수정하기
+          </button>
+          <button
+            type="button"
+            onClick={cancelEdit}
+            className="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+          >
+            수정 취소
+          </button>
+        </div>
       </form>
     </div>
   );

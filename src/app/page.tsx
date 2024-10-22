@@ -43,17 +43,17 @@ export default function Home() {
     };
   }, []);
 
-  if (isLoading) return <p>로딩 중...</p>;
-  if (error) return <p>데이터를 가져오는 중 오류 발생: {error.message}</p>;
+  if (isLoading) return <p className="text-center text-gray-500">로딩 중...</p>;
+  if (error) return <p className="text-center text-red-500">데이터를 가져오는 중 오류 발생: {error.message}</p>;
 
   return (
-    <div>
-      <h1>게시판</h1>
+    <div className="max-w-4xl mx-auto p-4">
+      <h1 className="text-3xl font-bold text-center mb-6">게시판</h1>
 
       {/* 게시물 추가 버튼 */}
-      <div>
+      <div className="flex justify-end mb-4">
         <Link href="/create">
-          <button style={{ backgroundColor: 'blue', color: 'white', padding: '10px', margin: '10px 0' }}>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             게시물 추가
           </button>
         </Link>
@@ -61,17 +61,18 @@ export default function Home() {
 
       {/* 게시글 목록 */}
       {posts && posts.length > 0 ? (
-        <ul>
+        <ul className="space-y-4">
           {posts.map((post: PostType) => (
-            <li key={post.id}>
+            <li key={post.id} className="p-4 bg-gray-100 rounded-lg shadow-md hover:bg-gray-200 transition">
               <Link href={`/posts/${post.id}`}>
-                {post.title}
+                <span className="text-xl font-semibold text-blue-600 hover:underline">{post.title}</span>
               </Link>
+              <p className="text-sm text-gray-500">{new Date(post.created_at).toLocaleString()}</p>
             </li>
           ))}
         </ul>
       ) : (
-        <p>게시물이 없습니다. 게시물을 추가해 주세요!</p>
+        <p className="text-center text-gray-500">게시물이 없습니다. 게시물을 추가해 주세요!</p>
       )}
     </div>
   );
