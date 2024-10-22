@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../../../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link'; // Link 컴포넌트 추가
 
 export default function CreatePost() {
   const [title, setTitle] = useState('');
@@ -42,6 +43,13 @@ export default function CreatePost() {
         />
         <button type="submit">작성하기</button>
       </form>
+
+      {/* 게시판 홈페이지로 돌아가는 버튼 */}
+      <Link href="/">
+        <button style={{ marginTop: '10px', backgroundColor: 'green', color: 'white' }}>
+          게시판 홈페이지로 돌아가기
+        </button>
+      </Link>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../../../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link'; // Link 컴포넌트 추가
 
 interface Post {
   id: string;
@@ -58,10 +59,24 @@ export default function PostDetail({ params }: { params: { id: string } }) {
       <p>{post.content}</p>
       <p>{new Date(post.created_at).toLocaleString()}</p>
 
+      {/* 수정 버튼 */}
+      <Link href={`/posts/${post.id}/edit`}>
+        <button style={{ backgroundColor: 'blue', color: 'white', marginRight: '10px' }}>
+          수정하기
+        </button>
+      </Link>
+
       {/* 삭제 버튼 */}
-      <button onClick={deletePost} style={{ backgroundColor: 'red', color: 'white' }}>
+      <button onClick={deletePost} style={{ backgroundColor: 'red', color: 'white', marginRight: '10px' }}>
         삭제하기
       </button>
+
+      {/* 게시판 홈페이지로 이동 버튼 */}
+      <Link href="/">
+        <button style={{ backgroundColor: 'green', color: 'white', marginTop: '10px' }}>
+          게시판 홈페이지로 이동
+        </button>
+      </Link>
     </div>
   );
 }
