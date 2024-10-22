@@ -1,5 +1,9 @@
+"use client";
+
+import { useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import Link from 'next/link';
+import useSWR, { mutate } from 'swr';
 
 // 게시물 타입 정의
 interface PostType {
@@ -10,23 +14,37 @@ interface PostType {
   created_at: string;
 }
 
-// Home 함수
-export default async function Home() {
-  // 게시물 데이터 가져오기
-  const { data: posts, error } = await supabase
-    .from('posts')
-    .select('*')
-   // .order('created_at');
-  // 에러 발생 시 에러 메시지 출력
-  console.log('Fetched posts:', posts);
-  if (error) {
-    console.log('Error fetching posts:', error);
-   return <p>Error fetching posts</p>;
-  }
+export default function Home() {
+  const { data: posts, error, isLoading } = useSWR('posts', async () => {
+    const { data, error } = await supabase
+      .from('posts')
+      .select('*')
+      .order('created_at', { ascending: false });
 
+    if (error) throw error;
+    return data;
+  });
 
-  // posts가 있을 경우 타입을 PostType[]으로 명시적으로 설정
-  const postList: PostType[] = posts || [];
+  useEffect(() => {
+    const subscription = supabase
+      .channel('public:posts')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'posts' },
+        (payload) => {
+          console.log('New post added:', payload);
+          mutate('posts');  // 실시간 데이터 반영
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(subscription);  // 구독 해제
+    };
+  }, []);
+
+  if (isLoading) return <p>로딩 중...</p>;
+  if (error) return <p>데이터를 가져오는 중 오류 발생: {error.message}</p>;
 
   return (
     <div>
@@ -42,9 +60,9 @@ export default async function Home() {
       </div>
 
       {/* 게시글 목록 */}
-      {postList.length > 0 ? (
+      {posts && posts.length > 0 ? (
         <ul>
-          {postList.map((post: PostType) => (
+          {posts.map((post: PostType) => (
             <li key={post.id}>
               <Link href={`/posts/${post.id}`}>
                 {post.title}
