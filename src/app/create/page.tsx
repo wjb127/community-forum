@@ -15,7 +15,11 @@ export default function CreatePost() {
 
     const { error } = await supabase
       .from('posts')
-      .insert([{ title, content }]);
+      .insert([{ 
+        title, 
+        content, 
+        created_at: new Date().toISOString() // 현재 시각을 ISO 포맷으로 저장
+      }]);
 
     if (error) {
       console.log('Error creating post:', error);
