@@ -71,14 +71,14 @@ export default function EditPost({ params }: { params: { id: string } }) {
             type="submit"
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
           >
-            수정하기
+            수정
           </button>
           <button
             type="button"
             onClick={cancelEdit}
             className="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
           >
-            수정 취소
+            취소
           </button>
         </div>
       </form>

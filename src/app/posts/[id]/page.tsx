@@ -64,7 +64,7 @@ export default function PostDetail({ params }: { params: { id: string } }) {
         {/* 수정 버튼 */}
         <Link href={`/posts/${post.id}/edit`}>
           <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
-            수정하기
+            수정
           </button>
         </Link>
 
@@ -73,13 +73,13 @@ export default function PostDetail({ params }: { params: { id: string } }) {
           onClick={deletePost}
           className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
         >
-          삭제하기
+          삭제
         </button>
 
         {/* 게시판 홈페이지로 이동 버튼 */}
         <Link href="/">
           <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
-            게시판 홈페이지로 이동
+            목록
           </button>
         </Link>
       </div>

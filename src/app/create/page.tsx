@@ -47,14 +47,14 @@ export default function CreatePost() {
           type="submit"
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
         >
-          작성하기
+          작성
         </button>
       </form>
 
       {/* 게시판 홈페이지로 돌아가는 버튼 */}
       <Link href="/" className="block mt-4 text-center">
         <button className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-          게시판 홈페이지로 돌아가기
+          취소
         </button>
       </Link>
     </div>
