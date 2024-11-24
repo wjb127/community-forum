@@ -7,6 +7,7 @@ import Link from "next/link";
 import useSWR, { mutate } from "swr";
 
 // 게시물 타입 정의
+
 interface PostType {
   id: number;
   user_id: string;
